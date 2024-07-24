@@ -15,7 +15,9 @@ public class Main {
         }
         new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 3 && isBeautiful(text)) {
+                if (text.length() == 3 && isPalindrome(text) ||
+                        text.length() == 3 && isSame(text) ||
+                        text.length() == 3 && isIncreasing(text)) {
                     count3.incrementAndGet();
                 }
             }
@@ -23,7 +25,9 @@ public class Main {
 
         new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 4 && isBeautiful(text)) {
+                if (text.length() == 4 && isPalindrome(text) ||
+                        text.length() == 4 && isSame(text) ||
+                        text.length() == 4 && isIncreasing(text)) {
                     count4.incrementAndGet();
                 }
             }
@@ -31,7 +35,9 @@ public class Main {
 
         new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 5 && isBeautiful(text)) {
+                if (text.length() == 5 && isPalindrome(text) ||
+                        text.length() == 5 && isSame(text) ||
+                        text.length() == 5 && isIncreasing(text)) {
                     count5.incrementAndGet();
                 }
             }
@@ -71,10 +77,6 @@ public class Main {
             }
         }
         return true;
-    }
-
-    public static boolean isBeautiful(String text) {
-        return isPalindrome(text) || isSame(text) || isIncreasing(text);
     }
 
     public static void printResult(int textLength, AtomicInteger count) {
