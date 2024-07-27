@@ -15,31 +15,19 @@ public class Main {
         }
         new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 3 && isPalindrome(text) ||
-                        text.length() == 3 && isSame(text) ||
-                        text.length() == 3 && isIncreasing(text)) {
-                    count3.incrementAndGet();
-                }
+                onThread(isPalindrome(text), text);
             }
         }).start();
 
         new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 4 && isPalindrome(text) ||
-                        text.length() == 4 && isSame(text) ||
-                        text.length() == 4 && isIncreasing(text)) {
-                    count4.incrementAndGet();
-                }
+                onThread(isSame(text), text);
             }
         }).start();
 
         new Thread(() -> {
             for (String text : texts) {
-                if (text.length() == 5 && isPalindrome(text) ||
-                        text.length() == 5 && isSame(text) ||
-                        text.length() == 5 && isIncreasing(text)) {
-                    count5.incrementAndGet();
-                }
+                onThread(isIncreasing(text), text);
             }
         }).start();
 
@@ -81,5 +69,21 @@ public class Main {
 
     public static void printResult(int textLength, AtomicInteger count) {
         System.out.println("Красивых слов с длиной " + textLength + ": " + count + " шт");
+    }
+
+    public static void onThread(boolean criterion, String text) {
+        if (criterion) {
+            switch (text.length()) {
+                case 3:
+                    count3.incrementAndGet();
+                    break;
+                case 4:
+                    count4.incrementAndGet();
+                    break;
+                case 5:
+                    count5.incrementAndGet();
+                    break;
+            }
+        }
     }
 }
